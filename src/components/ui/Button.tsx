@@ -2,7 +2,7 @@ import { ReactNode, ButtonHTMLAttributes, MouseEventHandler } from "react";
 import styles from "./Button.module.css";
 
 interface ButtonBaseProps {
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "secondary" | "ghost" | "filled";
   size?: "md" | "lg";
   children: ReactNode;
 }

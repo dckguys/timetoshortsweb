@@ -42,6 +42,18 @@
   background: var(--color-bg-glass-hover);
 }
 
+/* Filled: 핑크 배경 채움 */
+.filled {
+  background: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  color: var(--color-text-primary);
+}
+
+.filled:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
 /* Ghost: 투명, 텍스트만 */
 .ghost {
   background: transparent;

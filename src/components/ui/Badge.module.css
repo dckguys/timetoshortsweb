@@ -3,7 +3,7 @@
   padding: 10px var(--space-lg) 8px;
   font-size: var(--text-lg);
   font-weight: 700;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-md);
   margin-bottom: var(--space-md);
 }
 

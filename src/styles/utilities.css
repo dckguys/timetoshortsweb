@@ -7,6 +7,10 @@
   font-weight: 700;
 }
 
+.white {
+  color: var(--color-text-primary);
+}
+
 .text-muted {
   color: var(--color-text-muted);
 }

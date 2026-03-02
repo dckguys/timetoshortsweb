@@ -57,7 +57,7 @@ export default function Service() {
               타임투쇼츠가 보유한 수백 명의 소속 크리에이터가
               <br />
               각자의 계정에서 직접 업로드하여{" "}
-              <span className="bold">&lsquo;진성 트래픽&rsquo;</span>을 만들어냅니다
+              <span className="bold white">&lsquo;진성 트래픽&rsquo;</span>을 만들어냅니다
             </p>
           </div>
         </AnimatedSection>
@@ -68,7 +68,7 @@ export default function Service() {
             <p className={styles.pointDesc}>
               원본 영상에 미세한 편집과 변형을 더해 플랫폼이
               <br />
-              <span className="bold">서로 다른 새로운 콘텐츠로 인식</span>하도록 재가공합니다
+              <span className="bold white">서로 다른 새로운 콘텐츠로 인식</span>하도록 재가공합니다
             </p>
           </div>
         </AnimatedSection>

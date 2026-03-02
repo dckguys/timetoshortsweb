@@ -167,7 +167,7 @@ export default function Pricing() {
             <p className={styles.cardDesc}>
               기업 전용 커스텀 플랜을 제안해 드립니다.
             </p>
-            <Button as="a" href="#contact" variant="primary" size="lg">
+            <Button as="a" href="#contact" variant="filled" size="lg">
               별도 문의하기 ↗
             </Button>
           </div>
