@@ -38,6 +38,7 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
     if (
       index < 0 ||
       index >= sectionCountRef.current ||
+      index === currentIndexRef.current ||
       isAnimating.current ||
       now - lastNavTime.current < COOLDOWN_MS
     )
@@ -47,6 +48,11 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
     lastNavTime.current = now;
     currentIndexRef.current = index;
     setCurrentIndex(index);
+
+    // 안전장치: transitionend가 안 걸릴 경우 대비
+    setTimeout(() => {
+      isAnimating.current = false;
+    }, 800);
   }, []);
 
   // transition 끝나면 잠금 해제
@@ -208,6 +214,9 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
   useEffect(() => {
     const handler = (e: Event) => {
       const { detail: targetId } = e as CustomEvent<string>;
+
+      // 네비게이션 클릭 시 애니메이션 잠금 강제 해제
+      isAnimating.current = false;
 
       if (targetId === "top") {
         goToSection(0);

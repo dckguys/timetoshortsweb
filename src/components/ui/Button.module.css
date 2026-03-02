@@ -10,12 +10,12 @@
 
 /* Sizes */
 .md {
-  padding: 12px var(--space-lg) 8px;
+  padding: 10px var(--space-lg) 8px;
   font-size: var(--text-base);
 }
 
 .lg {
-  padding: 16px var(--space-xl) 12px;
+  padding: 14px var(--space-xl) 12px;
   font-size: var(--text-lg);
 }
 
@@ -59,12 +59,12 @@
 
 @media (max-width: 768px) {
   .md {
-    padding: 10px 16px 6px;
+    padding: 8px 16px 6px;
     font-size: 14px;
   }
 
   .lg {
-    padding: 12px 20px 8px;
+    padding: 10px 20px 8px;
     font-size: 15px;
   }
 }

@@ -1,6 +1,6 @@
 .badge {
   display: inline-block;
-  padding: 12px var(--space-lg) 8px;
+  padding: 10px var(--space-lg) 8px;
   font-size: var(--text-lg);
   font-weight: 700;
   border-radius: var(--radius-pill);
@@ -31,7 +31,7 @@
 
 @media (max-width: 768px) {
   .badge {
-    padding: 8px 12px 4px;
+    padding: 6px 12px 4px;
     font-size: 13px;
   }
 
