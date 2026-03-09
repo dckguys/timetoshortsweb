@@ -49,27 +49,27 @@ export default function Service() {
         </AnimatedSection>
 
         <AnimatedSection delay={0.2}>
-          <div className={styles.pointCard}>
-            <Badge variant="outline">POINT 1. Real Creator Network</Badge>
-            <p className={styles.pointDesc}>
-              유령 계정이나 매크로 봇은 쓰지 않습니다.
-              <br />
-              타임투쇼츠가 보유한 수백 명의 소속 크리에이터가
-              <br />
-              각자의 계정에서 직접 업로드하여{" "}
-              <span className="bold white">&lsquo;진성 트래픽&rsquo;</span>을 만들어냅니다
-            </p>
-          </div>
-        </AnimatedSection>
+          <div className={styles.points}>
+            <div className={styles.pointCard}>
+              <Badge variant="outline">POINT 1. Real Creator Network</Badge>
+              <p className={styles.pointDesc}>
+                유령 계정이나 매크로 봇은 쓰지 않습니다.
+                <br />
+                타임투쇼츠가 보유한 수백 명의 소속 크리에이터가
+                <br />
+                각자의 계정에서 직접 업로드하여{" "}
+                <span className="bold white">&lsquo;진성 트래픽&rsquo;</span>을 만들어냅니다
+              </p>
+            </div>
 
-        <AnimatedSection delay={0.35}>
-          <div className={styles.pointCard}>
-            <Badge variant="outline">POINT 2. Smart Variation</Badge>
-            <p className={styles.pointDesc}>
-              원본 영상에 미세한 편집과 변형을 더해 플랫폼이
-              <br />
-              <span className="bold white">서로 다른 새로운 콘텐츠로 인식</span>하도록 재가공합니다
-            </p>
+            <div className={styles.pointCard}>
+              <Badge variant="outline">POINT 2. Smart Variation</Badge>
+              <p className={styles.pointDesc}>
+                원본 영상에 미세한 편집과 변형을 더해 플랫폼이
+                <br />
+                <span className="bold white">서로 다른 새로운 콘텐츠로 인식</span>하도록 재가공합니다
+              </p>
+            </div>
           </div>
         </AnimatedSection>
       </SectionContainer>

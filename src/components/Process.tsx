@@ -34,6 +34,7 @@ export default function Process() {
       <div className={styles.steps}>
         {steps.map((item, idx) => (
           <AnimatedSection key={idx} delay={0.15 * (idx + 1)}>
+            {idx > 0 && <span className={styles.arrow}>→</span>}
             <div className={styles.stepCard}>
               <Badge variant="outline">{item.step}</Badge>
               <p className={styles.stepDesc}>

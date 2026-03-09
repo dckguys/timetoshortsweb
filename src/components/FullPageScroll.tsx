@@ -70,20 +70,27 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
     return () => wrapper.removeEventListener("transitionend", onEnd);
   }, []);
 
-  // 마지막(Contact) 섹션 내부 스크롤 체크
-  const checkLastSectionScroll = useCallback(
-    (deltaY: number): "navigate-up" | "allow" | "block" => {
+  // scrollable 섹션 내부 스크롤 체크
+  const checkSectionScroll = useCallback(
+    (deltaY: number): "navigate-up" | "navigate-down" | "allow" | "block" => {
       const sections = getSections();
       const idx = currentIndexRef.current;
-      if (idx !== sections.length - 1) return "allow";
-
       const section = sections[idx];
+
+      // scrollable 섹션인지 확인
+      const isScrollable = section.scrollHeight > section.clientHeight + 2;
+      if (!isScrollable) return "allow";
+
       const atTop = section.scrollTop <= 0;
       const atBottom =
         section.scrollTop + section.clientHeight >= section.scrollHeight - 2;
 
       if (deltaY < 0 && atTop) return "navigate-up";
-      if (deltaY > 0 && atBottom) return "block";
+      if (deltaY > 0 && atBottom) {
+        // 마지막 섹션이면 더 이상 넘기지 않음
+        if (idx === sections.length - 1) return "block";
+        return "navigate-down";
+      }
       // 내부에서 스크롤 가능
       return "allow";
     },
@@ -100,17 +107,24 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
       if (Math.abs(e.deltaY) < 50) return;
 
       const idx = currentIndexRef.current;
-      const sections = getSections();
-      const isLast = idx === sections.length - 1;
+      const result = checkSectionScroll(e.deltaY);
 
-      if (isLast) {
-        const result = checkLastSectionScroll(e.deltaY);
-        if (result === "navigate-up") {
-          e.preventDefault();
-          goToSection(idx - 1);
-        } else if (result === "block") {
-          e.preventDefault();
-        }
+      if (result === "allow") {
+        // 내부 스크롤 허용
+        return;
+      }
+      if (result === "navigate-up") {
+        e.preventDefault();
+        goToSection(idx - 1);
+        return;
+      }
+      if (result === "navigate-down") {
+        e.preventDefault();
+        goToSection(idx + 1);
+        return;
+      }
+      if (result === "block") {
+        e.preventDefault();
         return;
       }
 
@@ -121,7 +135,7 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
 
     window.addEventListener("wheel", onWheel, { passive: false });
     return () => window.removeEventListener("wheel", onWheel);
-  }, [goToSection, getSections, checkLastSectionScroll]);
+  }, [goToSection, getSections, checkSectionScroll]);
 
   // ── Touch (모바일) ──
   useEffect(() => {
@@ -138,18 +152,13 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
     const onTouchMove = (e: TouchEvent) => {
       if (!isSwiping || isAnimating.current) return;
 
-      const idx = currentIndexRef.current;
-      const sections = getSections();
-      const isLast = idx === sections.length - 1;
+      const deltaY = startY - e.touches[0].clientY;
+      const result = checkSectionScroll(deltaY);
 
-      // 마지막 섹션(Contact): 내부 스크롤 허용
-      if (isLast) {
-        const deltaY = startY - e.touches[0].clientY;
-        const result = checkLastSectionScroll(deltaY);
-        if (result === "allow") return; // 기본 터치 스크롤 허용
-      }
+      // scrollable 섹션: 내부 스크롤 허용
+      if (result === "allow") return;
 
-      // 나머지 섹션: 네이티브 스크롤 차단
+      // 나머지: 네이티브 스크롤 차단
       e.preventDefault();
     };
 
@@ -168,16 +177,17 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
       if (!isSwipe) return;
 
       const idx = currentIndexRef.current;
-      const sections = getSections();
-      const isLast = idx === sections.length - 1;
+      const result = checkSectionScroll(deltaY);
 
-      if (isLast) {
-        const result = checkLastSectionScroll(deltaY);
-        if (result === "navigate-up") {
-          goToSection(idx - 1);
-        }
+      if (result === "navigate-up") {
+        goToSection(idx - 1);
         return;
       }
+      if (result === "navigate-down") {
+        goToSection(idx + 1);
+        return;
+      }
+      if (result === "allow" || result === "block") return;
 
       const direction = deltaY > 0 ? 1 : -1;
       goToSection(idx + direction);
@@ -191,7 +201,7 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchend", onTouchEnd);
     };
-  }, [goToSection, getSections, checkLastSectionScroll]);
+  }, [goToSection, getSections, checkSectionScroll]);
 
   // ── Keyboard ──
   useEffect(() => {
