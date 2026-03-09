@@ -44,11 +44,33 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // TODO: Supabase 연동
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const formData = new FormData(e.currentTarget);
+
+    const res = await fetch("/api/inquiry", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: formData.get("name"),
+        company: formData.get("company"),
+        phone: formData.get("phone"),
+        email: formData.get("email"),
+        category: formData.get("category"),
+        description: formData.get("description"),
+        has_video: formData.get("hasVideo"),
+        budget: formData.get("budget"),
+        note: formData.get("note") || null,
+      }),
+    });
 
     setIsSubmitting(false);
+
+    if (!res.ok) {
+      alert("제출 중 오류가 발생했습니다. 다시 시도해주세요.");
+      return;
+    }
+
     setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 3000);
   };
 
   if (submitted) {
