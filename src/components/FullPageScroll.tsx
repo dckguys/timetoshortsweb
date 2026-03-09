@@ -17,7 +17,7 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const sectionCountRef = useRef(0);
   const accumulatedDelta = useRef(0);
-  const deltaResetTimer = useRef<ReturnType<typeof setTimeout>>();
+  const deltaResetTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const COOLDOWN_MS = 1200;
   const DELTA_THRESHOLD = 50;
 
