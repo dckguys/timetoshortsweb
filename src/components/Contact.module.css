@@ -83,6 +83,7 @@
 .submitWrap {
   text-align: center;
   margin-top: var(--space-md);
+  padding-bottom: var(--space-5xl);
 }
 
 /* Success state */

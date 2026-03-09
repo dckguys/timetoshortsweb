@@ -33,20 +33,29 @@ export default function Process() {
 
       <div className={styles.steps}>
         {steps.map((item, idx) => (
-          <AnimatedSection key={idx} delay={0.15 * (idx + 1)}>
-            {idx > 0 && <span className={styles.arrow}>→</span>}
-            <div className={styles.stepCard}>
-              <Badge variant="outline">{item.step}</Badge>
-              <p className={styles.stepDesc}>
-                {item.desc.split("\n").map((line, i) => (
-                  <span key={i}>
-                    {line}
-                    {i < item.desc.split("\n").length - 1 && <br />}
-                  </span>
-                ))}
-              </p>
-            </div>
-          </AnimatedSection>
+          <>
+            {idx > 0 && (
+              <AnimatedSection key={`arrow-${idx}`} delay={0.15 * (idx + 1)} className={styles.arrowWrap}>
+                <svg className={styles.arrow} width="100" height="32" viewBox="-4 -4 102 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="0" y1="12" x2="87" y2="12" stroke="currentColor" strokeWidth="3.5" />
+                  <path d="M80 4L90 12L80 20" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </AnimatedSection>
+            )}
+            <AnimatedSection key={idx} delay={0.15 * (idx + 1)}>
+              <div className={styles.stepCard}>
+                <Badge variant="outline">{item.step}</Badge>
+                <p className={styles.stepDesc}>
+                  {item.desc.split("\n").map((line, i) => (
+                    <span key={i}>
+                      {line}
+                      {i < item.desc.split("\n").length - 1 && <br />}
+                    </span>
+                  ))}
+                </p>
+              </div>
+            </AnimatedSection>
+          </>
         ))}
       </div>
     </SectionContainer>

@@ -1,0 +1,200 @@
+.loginWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #0a0a0a;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 40px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  min-width: 320px;
+}
+
+.loginTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+
+.loginInput {
+  padding: 12px 16px;
+  background: #0a0a0a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+}
+
+.loginInput:focus {
+  border-color: #666;
+}
+
+.loginBtn {
+  padding: 12px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.loginBtn:disabled {
+  opacity: 0.5;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 13px;
+  text-align: center;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: #0a0a0a;
+  min-height: 100vh;
+  color: #fff;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.count {
+  font-size: 14px;
+  color: #888;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #222;
+}
+
+.card.contacted {
+  opacity: 0.6;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.date {
+  font-size: 13px;
+  color: #888;
+}
+
+.statusPending {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #3b2a00;
+  color: #fbbf24;
+}
+
+.statusDone {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #0a2e1a;
+  color: #4ade80;
+}
+
+.checkBtn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: transparent;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.checkBtn.checked {
+  background: #0a2e1a;
+  border-color: #4ade80;
+  color: #4ade80;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 12px;
+  color: #666;
+}
+
+.value {
+  font-size: 14px;
+  color: #ddd;
+}
+
+.descSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.descText {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.empty {
+  text-align: center;
+  color: #666;
+  padding: 60px 0;
+  font-size: 14px;
+}

@@ -16,7 +16,10 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
   const lastNavTime = useRef(0);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const sectionCountRef = useRef(0);
-  const COOLDOWN_MS = 300;
+  const accumulatedDelta = useRef(0);
+  const deltaResetTimer = useRef<ReturnType<typeof setTimeout>>();
+  const COOLDOWN_MS = 1200;
+  const DELTA_THRESHOLD = 50;
 
   // 섹션 개수 파악
   useEffect(() => {
@@ -49,10 +52,10 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
     currentIndexRef.current = index;
     setCurrentIndex(index);
 
-    // 안전장치: transitionend가 안 걸릴 경우 대비
+    // 안전장치: transitionend가 안 걸릴 경우 대비 (transition 0.9s보다 길게)
     setTimeout(() => {
       isAnimating.current = false;
-    }, 800);
+    }, 1200);
   }, []);
 
   // transition 끝나면 잠금 해제
@@ -79,7 +82,12 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
 
       // scrollable 섹션인지 확인
       const isScrollable = section.scrollHeight > section.clientHeight + 2;
-      if (!isScrollable) return "allow";
+      if (!isScrollable) {
+        // 내부 스크롤이 없는 섹션은 바로 섹션 이동
+        if (deltaY < 0) return "navigate-up";
+        if (deltaY > 0) return "navigate-down";
+        return "block";
+      }
 
       const atTop = section.scrollTop <= 0;
       const atBottom =
@@ -100,37 +108,44 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
   // ── Wheel (데스크톱) ──
   useEffect(() => {
     const onWheel = (e: WheelEvent) => {
-      if (isAnimating.current || Date.now() - lastNavTime.current < COOLDOWN_MS) {
+      const inCooldown = isAnimating.current || Date.now() - lastNavTime.current < COOLDOWN_MS;
+
+      if (inCooldown) {
+        // 쿨다운 중에는 누적도 리셋하고 이벤트 차단
+        accumulatedDelta.current = 0;
         e.preventDefault();
         return;
       }
-      if (Math.abs(e.deltaY) < 50) return;
 
       const idx = currentIndexRef.current;
       const result = checkSectionScroll(e.deltaY);
 
       if (result === "allow") {
-        // 내부 스크롤 허용
-        return;
-      }
-      if (result === "navigate-up") {
-        e.preventDefault();
-        goToSection(idx - 1);
-        return;
-      }
-      if (result === "navigate-down") {
-        e.preventDefault();
-        goToSection(idx + 1);
-        return;
-      }
-      if (result === "block") {
-        e.preventDefault();
+        accumulatedDelta.current = 0;
         return;
       }
 
       e.preventDefault();
-      const direction = e.deltaY > 0 ? 1 : -1;
-      goToSection(idx + direction);
+
+      if (result === "block") return;
+
+      // 트랙패드 대응: deltaY 누적 후 임계값 도달 시 이동
+      accumulatedDelta.current += e.deltaY;
+      clearTimeout(deltaResetTimer.current);
+      deltaResetTimer.current = setTimeout(() => {
+        accumulatedDelta.current = 0;
+      }, 200);
+
+      if (Math.abs(accumulatedDelta.current) < DELTA_THRESHOLD) return;
+
+      // 네비게이션 실행 후 누적 리셋
+      accumulatedDelta.current = 0;
+
+      if (result === "navigate-up") {
+        goToSection(idx - 1);
+      } else if (result === "navigate-down") {
+        goToSection(idx + 1);
+      }
     };
 
     window.addEventListener("wheel", onWheel, { passive: false });
