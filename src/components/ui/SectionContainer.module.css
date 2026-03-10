@@ -53,8 +53,8 @@
   }
 
   .scrollable {
-    padding-top: calc(var(--nav-height-mobile, 56px) + var(--space-lg));
-    padding-bottom: var(--space-lg);
+    padding-top: calc(var(--nav-height-mobile, 56px) + 40px);
+    padding-bottom: 240px;
   }
 
   .right {

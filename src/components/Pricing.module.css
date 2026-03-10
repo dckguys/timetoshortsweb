@@ -137,7 +137,7 @@
 
   .cards {
     grid-template-columns: 1fr;
-    gap: var(--space-md);
+    gap: var(--space-xl);
   }
 
   .card {
@@ -145,28 +145,29 @@
   }
 
   .planName {
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
   }
 
   .planDesc {
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     margin-bottom: var(--space-sm);
     min-height: auto;
   }
 
   .features {
     grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    margin-bottom: var(--space-md);
+    gap: 4px;
+    margin-bottom: var(--space-sm);
   }
 
   .feature {
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
   }
 
   .priceTag {
-    font-size: var(--text-base);
-    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-sm);
+    padding: 0;
+    border: none;
   }
 
   .gradientCard {

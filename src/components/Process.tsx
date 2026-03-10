@@ -1,5 +1,7 @@
 "use client";
 
+import { Fragment } from "react";
+
 import AnimatedSection from "./AnimatedSection";
 import SectionContainer from "./ui/SectionContainer";
 import SectionHeading from "./ui/SectionHeading";
@@ -33,16 +35,16 @@ export default function Process() {
 
       <div className={styles.steps}>
         {steps.map((item, idx) => (
-          <>
+          <Fragment key={idx}>
             {idx > 0 && (
-              <AnimatedSection key={`arrow-${idx}`} delay={0.15 * (idx + 1)} className={styles.arrowWrap}>
+              <AnimatedSection delay={0.15 * (idx + 1)} className={styles.arrowWrap}>
                 <svg className={styles.arrow} width="100" height="32" viewBox="-4 -4 102 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <line x1="0" y1="12" x2="87" y2="12" stroke="currentColor" strokeWidth="3.5" />
                   <path d="M80 4L90 12L80 20" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </AnimatedSection>
             )}
-            <AnimatedSection key={idx} delay={0.15 * (idx + 1)}>
+            <AnimatedSection delay={0.15 * (idx + 1)}>
               <div className={styles.stepCard}>
                 <Badge variant="outline">{item.step}</Badge>
                 <p className={styles.stepDesc}>
@@ -55,7 +57,7 @@ export default function Process() {
                 </p>
               </div>
             </AnimatedSection>
-          </>
+          </Fragment>
         ))}
       </div>
     </SectionContainer>

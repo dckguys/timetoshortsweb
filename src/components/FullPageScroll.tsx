@@ -18,8 +18,11 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
   const sectionCountRef = useRef(0);
   const accumulatedDelta = useRef(0);
   const deltaResetTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const edgeHitCount = useRef(0);
+  const lastEdgeDirection = useRef(0);
   const COOLDOWN_MS = 1200;
   const DELTA_THRESHOLD = 50;
+  const EDGE_HITS_REQUIRED = 2;
 
   // 섹션 개수 파악
   useEffect(() => {
@@ -93,12 +96,38 @@ export default function FullPageScroll({ children }: { children: ReactNode }) {
       const atBottom =
         section.scrollTop + section.clientHeight >= section.scrollHeight - 2;
 
-      if (deltaY < 0 && atTop) return "navigate-up";
-      if (deltaY > 0 && atBottom) {
-        // 마지막 섹션이면 더 이상 넘기지 않음
-        if (idx === sections.length - 1) return "block";
-        return "navigate-down";
+      if (deltaY < 0 && atTop) {
+        const dir = -1;
+        if (lastEdgeDirection.current === dir) {
+          edgeHitCount.current++;
+        } else {
+          edgeHitCount.current = 1;
+          lastEdgeDirection.current = dir;
+        }
+        if (edgeHitCount.current >= EDGE_HITS_REQUIRED) {
+          edgeHitCount.current = 0;
+          return "navigate-up";
+        }
+        return "block";
       }
+      if (deltaY > 0 && atBottom) {
+        if (idx === sections.length - 1) return "block";
+        const dir = 1;
+        if (lastEdgeDirection.current === dir) {
+          edgeHitCount.current++;
+        } else {
+          edgeHitCount.current = 1;
+          lastEdgeDirection.current = dir;
+        }
+        if (edgeHitCount.current >= EDGE_HITS_REQUIRED) {
+          edgeHitCount.current = 0;
+          return "navigate-down";
+        }
+        return "block";
+      }
+      // 스크롤 중이면 edge 카운터 리셋
+      edgeHitCount.current = 0;
+      lastEdgeDirection.current = 0;
       // 내부에서 스크롤 가능
       return "allow";
     },
