@@ -59,17 +59,11 @@ export default function Hero() {
           </Button>
           <Button
             as="a"
-            href="#service"
+            href="/api/download"
             variant="secondary"
             size="lg"
-            onClick={(e: React.MouseEvent) => {
-              e.preventDefault();
-              window.dispatchEvent(
-                new CustomEvent("navigateToSection", { detail: "service" })
-              );
-            }}
           >
-            서비스 더 알아보기
+            서비스소개서 다운로드
           </Button>
         </motion.div>
       </div>

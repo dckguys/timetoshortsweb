@@ -10,7 +10,14 @@ export default function About() {
   return (
     <section id="about">
       {/* Part 1: 좋은 것은 마땅히 */}
-      <SectionContainer align="left">
+      <SectionContainer
+        align="left"
+        style={{
+          backgroundImage: "url(/images/BG_Section02.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <AnimatedSection>
           <Badge variant="solid">Good things deserve to be known</Badge>
         </AnimatedSection>
@@ -31,7 +38,14 @@ export default function About() {
       </SectionContainer>
 
       {/* Part 2: 알고리즘의 선택 */}
-      <SectionContainer align="right">
+      <SectionContainer
+        align="right"
+        style={{
+          backgroundImage: "url(/images/BG_Section03.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <AnimatedSection>
           <SectionHeading>
             하지만 잘 만든 영상 하나만으로는

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import KakaoChannel from "@/components/KakaoChannel";
 
 export const metadata: Metadata = {
   title: "TIME TO SHORTS | 국내 유일 실명 크리에이터 기반 매스 시딩",
@@ -23,6 +24,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <KakaoChannel />
       </body>
     </html>
   );

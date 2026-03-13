@@ -10,7 +10,14 @@ export default function Service() {
   return (
     <section id="service">
       {/* Part 1: 압도적인 물량 */}
-      <SectionContainer align="left">
+      <SectionContainer
+        align="left"
+        style={{
+          backgroundImage: "url(/images/BG_Section04.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <AnimatedSection>
           <Badge variant="solid">Successful Viral Agency</Badge>
         </AnimatedSection>
@@ -39,7 +46,14 @@ export default function Service() {
       </SectionContainer>
 
       {/* Part 2: 크리에이터 포인트 */}
-      <SectionContainer align="right">
+      <SectionContainer
+        align="right"
+        style={{
+          backgroundImage: "url(/images/BG_Section05.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <AnimatedSection>
           <SectionHeading>
             타임투쇼츠의 크리에이터들이 만드는

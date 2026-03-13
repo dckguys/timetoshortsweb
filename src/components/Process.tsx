@@ -25,7 +25,10 @@ const steps = [
 
 export default function Process() {
   return (
-    <SectionContainer id="process" align="center">
+    <SectionContainer
+      id="process"
+      align="center"
+    >
       <AnimatedSection>
         <SectionHeading size="lg">
           <span className="accent">과정</span><span className={styles.gray}>은 </span>숏츠<span className={styles.gray}>처럼, </span>

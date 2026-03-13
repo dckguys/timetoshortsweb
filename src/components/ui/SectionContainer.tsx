@@ -8,6 +8,7 @@ interface SectionContainerProps {
   scrollable?: boolean;
   children: ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export default function SectionContainer({
@@ -17,12 +18,14 @@ export default function SectionContainer({
   scrollable = false,
   children,
   className,
+  style,
 }: SectionContainerProps) {
   return (
     <div
       className={`${styles.section} ${scrollable ? styles.scrollable : ""} ${className ?? ""}`}
       id={id}
       data-section
+      style={style}
     >
       <div
         className={`${styles.inner} ${styles[align]} ${

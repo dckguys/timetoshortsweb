@@ -56,7 +56,9 @@ export default function Pricing() {
   return (
     <section id="pricing">
       {/* 배포형 상품 */}
-      <SectionContainer scrollable>
+      <SectionContainer
+        scrollable
+      >
         <AnimatedSection>
           <SectionHeading
             subtitle="목표하는 파급력의 크기에 맞춰 최적의 플랜을 선택하세요."
