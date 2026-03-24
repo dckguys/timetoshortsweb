@@ -3,7 +3,7 @@
 export default function KakaoChannel() {
   return (
     <a
-      href="http://pf.kakao.com/_pxcPxen"
+      href="http://pf.kakao.com/_nBiZX/chat"
       target="_blank"
       rel="noopener noreferrer"
       style={{
